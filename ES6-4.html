@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<title> Java Script Ders </title>
+</head>
+
+<body>
+		<div class="container-fluid mt-4">
+			<p id="idp"> Def </p>
+		</div>
+
+		<script>
+			"use strict";
+
+			function func(isim,soyisim){
+				document.getElementById("idp").innerHTML = `İsim:${isim} Soyisim:${soyisim}`; //Template Literals
+			}			
+			func("Hasan","Cerit");
+
+
+			function topla(x,y,z){
+				return x+y+z;
+			}
+			let dizi = [3,5,7];
+			console.log(topla(...dizi)); // ...dizi ile dizinin tüm elemanları ayrı ayrı alınır.
+
+
+
+			let obj = {isim:"Hasan", soyisim:"Cerit", age:32};
+			let st = "ABC"
+			for(let i in obj){ //Objenin içinde gezilebilir. (JS kendi özelliği).
+				console.log(i);	
+				console.log(obj[i]); //Alanlara . ile değil [] ile ulaştık.
+			}
+			for(let i in st){
+				console.log(st[i]); //Her harfi ayrı ayrı yazar.
+			}
+
+			for(let i of st){ // EcmaScript ile gelen özellik
+				console.log(i); //Her harfi ayrı ayrı yazar.
+			}
+			//for(let i of obj) Olmaz not iterable hatası
+
+			function* yaz(){//Generatör Func
+		  		console.log("a");
+		  yield console.log("b");
+   		  		console.log("c");
+				console.log("d");
+		  yield	console.log("e");
+				console.log("f");
+			}
+
+
+			let newYaz = yaz(); //Generatör kullanırken, fonksyionu bir değişkene atarız. Ve bu değikennin next fonks çağırarak yieldlarıda 				    ilerleriz.
+			let newYaz2 = yaz();
+			newYaz.next();  //ab
+			newYaz.next();  //cde
+
+			newYaz2.next();  //ab, farklı değişkene atadığımız için ab yazdı
+
+			newYaz.next(); //f
+		</script> 
+</body>
+
+</html>
+

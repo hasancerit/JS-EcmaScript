@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<title> Java Script Ders </title>
+</head>
+
+<body>
+		<div class="container-fluid mt-4">
+		</div>
+
+		<script>			
+			class Person{
+				constructor(name,surname,age){
+					this.name = name;
+					this.surname = surname;
+					this.age = age;
+					this.diger; //var diger;
+				}
+				func1(){
+					return "FUNCTİON 1";
+				}
+					//istediğin ismi verebilirsin.
+				get getName(){ //Es 6'nın sunduğu set ve get metodları
+					console.log("get name çağırıldı.")
+					return this.name;
+				}
+
+				set setName(name){
+					console.log("set name çağırıldı.")
+					this.name = name;
+				}
+			}
+
+			let p1 = new Person("Hasan","Cerit",22);
+				console.log(p1.func1());
+				console.log(p1.name);
+			p1.diger = "diger";
+				console.log(p1.diger);
+				console.log(p1.getName); //es6'nın sunduğu set get çağırılırken, parantez kullanılmaz, eşittir kullanılır.
+			p1.setName = "Deniz";    //es6'nın sunduğu set get çağırılırken, parantez kullanılmaz, eşittir kullanılır.
+				console.log(p1.getName) 
+
+
+			class Engineer extends Person{
+				constructor(name,surname,age){
+					super(name,surname,age); //Üst sınıfın cons.çağırılmalı.
+				}
+
+				static func2(){
+					return "Static Metod";
+				}
+			} 
+
+			let eng = new Engineer("Hasan","Cerit","22");
+			eng.diger = "İnh";
+			console.log(eng.name);
+			console.log(eng.diger);
+			console.log(eng.getName);
+			console.log(eng.func1()); 
+
+			console.log(Engineer.func2());
+		</script> 
+</body>
+
+</html>
+

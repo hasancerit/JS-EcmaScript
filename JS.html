@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title> Java Script Ders </title>
+	<style>
+		.header{
+			text-align: center;
+			font-family: sans-serif;
+			font-size: 18px;
+			background: red;
+		}
+
+		.container{
+			text-align: center;
+			font-size: 30px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="header">
+		<h1>JS dersleri</h1>			
+	</div>
+
+	<hr>
+
+	<div class="container">  
+		<button onclick="tikla(this)"> Tıkla </button> <!-- Burada onclick= " this.style.color='red' " de yapabilirdik.-->
+		<hr>								   		   <!-- Yani bir comp. içinde js event tanımlar ve this kullanırsak, o comp'nin  													   elementine ulaşmış oluruz-->
+		
+		<button onclick="renkdegis()"> Renk Değiiştir </button> <!-- pa1'i elementini js içinde çekeceğiz. -->
+		<button onclick="renkdegis2(document.getElementById('pa1'))"> Element Göndererek Renk Değiştir </button> 
+																<!--Bu sefer pa1i elementini, buradan çekip yolladık -->
+		<p id="pa1"> Aman aman nere geldik </p>
+		<hr>
+
+		<p id="idp"> Örnek Paragraf </p>
+
+		<h2> a </h2>
+		<h2> a </h2>
+		<h2> a </h2>
+		<h2> a </h2>
+		<h2> a </h2>
+		<h2> a </h2>
+		<h2> a </h2>
+		<h2> a </h2>
+		<h2> a </h2>
+		<hr>
+
+		<div id="iddiv1">
+			DİV DEFAULTTEXT
+		</div>
+		<hr>
+
+		<div id="iddiv2">
+			
+			<p id="rem"> 1. Paragraf </p>
+			<p> 2. Paragraf </p>
+			<p> 3. Paragraf </p>
+
+		</div>
+	</div>
+
+	
+
+	<script> //Fonksiyon ve Obje Yöntemleri
+		//Func Olusturma Yöntemi 1
+		function func1(text){
+			console.log(text);
+			return text;
+		}
+		deger = func1("Function 1");
+		console.log("Deger:"+deger);
+
+		//Obje olusturma yönetimi 1 
+		var calisan = {
+			isim : "Hasan",
+			soyisim : "Cerit",
+			no : "1",
+			diller : ["Java","C","pyhton"], 
+			adres : { //Obje içi obje
+				mahalle : "Fatih",
+				sokak : "4601"
+			},
+			isimBilgiler : function(){ //Obje içi func
+				return "İsim:" + this.isim;
+			}
+		}
+		console.log(calisan.isim);
+		console.log(calisan.diller[2]);
+		console.log(calisan.adres.mahalle);
+		console.log(calisan.isimBilgiler());
+
+		//Obje colusturma yöntemi 2
+		var calisan2 = new Object();
+		calisan2.isim = "Deniz";
+		calisan2.soyisim = "İnan";
+		calisan2.isimBilgiler = function(){
+			return "İsim:" + this.isim;
+		};
+		console.log(calisan2.isim);
+		console.log(calisan2.isimBilgiler());
+
+		//Obje oluturma yöntemi 3 **
+		function Calisan(isim,soyisim,no){
+			this.isim = isim;
+			this.soyisim = soyisim;
+			this.no = no;
+			var digerBilgi; //this.digerBilgi;
+
+			this.isimBilgiler = function(){
+				return this.isim;
+			}
+			this.digerfunc; //Dışarıdan fonk atama, this.digerfunc
+		}
+		var calisan3 = new Calisan("Onur","Ekin","3");
+		calisan3.isim = "Onur Update";
+		calisan3.digerBilgi = "Cons ile gönderilmedi";
+		calisan3.digerBilgi2 = "Bu da cons ile gönderilmedi"
+		calisan3.digerfunc = function(){
+			return "Dışardan Fonksiyon Atama";
+		}
+
+		console.log(calisan3.isim);
+		console.log(calisan3.isimBilgiler()); 
+		console.log(calisan3.digerBilgi);
+		console.log(calisan3.digerfunc());
+		console.log(calisan3.test());
+	</script>
+
+	<script> //Events
+
+		function tikla(tiklanan){// Html Kısmından gelen elementi çekip, manip yapıyoruz.
+			tiklanan.style.color = "red";
+		}
+
+		function renkdegis(){   //Değiştirmek istediğimiz elementi çekiyoruz.
+			var p1element = document.getElementById("pa1");
+			p1element.style.color = "red";
+		}
+
+		function renkdegis2(p1element){ //Degişecek element html kısmında yollanıyor, onu çekip manip yapıyoruz.
+			p1element.style.color = "red";
+		}
+	</script>
+
+	<script>//DOM 
+		//Element Fonksiyonları https://www.w3schools.com/jsref/dom_obj_all.asp
+		var elementp = document.getElementById("idp"); //Element Çekme
+		elementp.innerHTML = "Değiştirilmiş Paragraf";
+
+		var h2elements = document.getElementsByTagName("h2");
+		for (var i = 0; i < h2elements.length; i++) {
+			h2elements[i].style.color = "red";
+			h2elements[i].innerHTML = "B";
+		}
+
+		var elementdiv = document.getElementById("iddiv1");
+		elementdiv.onclick = function(){
+			this.innerHTML = "DEĞİŞTİRİLMİŞ DİV"; //Eğer JS ile event atarsak, this kullanarak, event atadığımız componentin Elementine ulaşabiliriz. (HTML kısmında, comp içinde event tanımladığımızdaki this gibi)
+		}
+
+		var yenielementp = document.createElement("p"); //Element oluşturma
+		yenielementp.innerHTML = "4. Paragraf";
+		yenielementp.style.color = "green";
+
+		var elementdiv2 = document.getElementById("iddiv2");
+		elementdiv2.appendChild(yenielementp);//Dive element ekleme
+
+		var elementps = document.getElementById("rem");
+		elementdiv2.removeChild(rem);//Divden element çıkarma
+	</script>
+</body>
+
+</html>
