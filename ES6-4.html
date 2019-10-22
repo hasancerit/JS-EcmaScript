@@ -10,7 +10,7 @@
 </head>
 
 <body>
-		<div class="container-fluid mt-4">
+		<div class ="container-fluid mt-4">
 			<p id="idp"> Def </p>
 		</div>
 
@@ -46,6 +46,8 @@
 			}
 			//for(let i of obj) Olmaz not iterable hatası
 
+
+
 			function* yaz(){//Generatör Func
 		  		console.log("a");
 		  yield console.log("b");
@@ -54,7 +56,6 @@
 		  yield	console.log("e");
 				console.log("f");
 			}
-
 
 			let newYaz = yaz(); //Generatör kullanırken, fonksyionu bir değişkene atarız. Ve bu değikennin next fonks çağırarak yieldlarıda 				    ilerleriz.
 			let newYaz2 = yaz();

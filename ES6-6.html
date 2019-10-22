@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<title> Java Script Ders </title>
+</head>
+
+<body>
+		<div class="container-fluid mt-4">              
+            <button onclick="depola()" class="btn btn-dark"> JSON DEPOLA</button>
+            <button onclick="cek()" class="btn btn-dark"> JSON ÇEK</button>
+        </div>
+
+		<script>
+            "use strict";
+            function depola(){
+                let json1 = ' {"isim":"hasan","soyisim":"cerit"} ' //JSON
+                let obj = {isim:"Deniz",soyisim:"İnan"};
+                let json2 = JSON.stringify(obj); //OBJE --> JSON
+
+                localStorage.setItem("jsonText",json1); //Local Hafızaya Ekler
+                localStorage.setItem("jsonObject",json2);
+            }
+
+            function cek(){
+                let json1 = localStorage.getItem("jsonText");//Local Hafızadan çeker.
+                let json2 = localStorage.getItem("jsonObject");
+                
+                let obj1 = JSON.parse(json1); //JSON --> OBJECT
+                let obj2 = JSON.parse(json2);
+                
+                console.log(obj1.isim+"\n"+obj2.isim);
+            }   
+        
+        /*JSON Stringdir. JSON.stringfy(X) X bir JS Objesi olmalıdır. Ve string return eder.
+                          JSON.parse(Y)    Y bir String olmalıdır. Ve obje(dizi) return eder.*/
+        </script>
+</body>
+
+</html>
+
