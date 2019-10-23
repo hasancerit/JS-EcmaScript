@@ -154,6 +154,48 @@
 		}
 	</script>
 
+	<script> //Sonradan Öğrendiklerim
+		console.log("****")
+		let arr = [1,2,3];
+		let [a,,b] = arr;
+		console.log(a);
+		console.log(b);
+
+		console.log("****")
+		let arr2 = [1,2,3,4,5,6,7];
+		let[c,d,,...e] = arr2;
+		console.log(c);
+		console.log(d);
+		console.log(e);
+		//let[...f,g,h] = arr2; ...f en son olmalı hatası
+		
+		console.log("***");
+		let obj = {isim:"Hasan", Soyisim:"Cerit", Yas:22}; 
+	/*	let {isim,Soyisim,Yas} = obj; //Degisken isimleri aynı olmalı isim degisikliği altta
+		console.log(isim);
+		console.log(Soyisim);
+		console.log(Yas);*/
+
+		console.log("***");
+		let {isim:f,Soyisim:g,Yas:h,def:ı = "def deger = ile verilir"} = obj; //İsim degistirmek
+		console.log(f);
+		console.log(g);
+		console.log(h);
+		console.log(ı);
+
+		console.log("***");
+		function ayır({isim:o,Soyisim:p,Yas:ü}){
+			console.log(o);
+			console.log(p);
+			console.log(ü);
+		}
+		ayır(obj);
+
+		console.log("***");
+		
+
+	</script>
+
 	<script>//DOM 
 		//Element Fonksiyonları https://www.w3schools.com/jsref/dom_obj_all.asp
 		var elementp = document.getElementById("idp"); //Element Çekme

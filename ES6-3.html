@@ -21,6 +21,12 @@
 					this.age = age;
 					this.diger; //var diger;
 				}
+				
+				static so1 = {deger1:"Değer1",deger2:"Değer2"}; //Static object
+				static stsayi1 = 5;  //static int
+				static ststring1 = "Static String"; //static string
+				
+				
 				func1(){
 					return "FUNCTİON 1";
 				}
@@ -35,6 +41,10 @@
 					this.name = name;
 				}
 			}
+			Person.so2 = {deger3:"Değer3",deger4:"Değer4"}; //Static sınıf 2
+			Person.stsayi2 = 10;
+			Person.ststring2 = "Sınıf için static string tanımladık"; //Static string 2
+			
 
 			let p1 = new Person("Hasan","Cerit",22);
 				console.log(p1.func1());
@@ -44,6 +54,19 @@
 				console.log(p1.getName); //es6'nın sunduğu set get çağırılırken, parantez kullanılmaz, eşittir kullanılır.
 			p1.setName = "Deniz";    //es6'nın sunduğu set get çağırılırken, parantez kullanılmaz, eşittir kullanılır.
 				console.log(p1.getName) 
+			p1.diger2 = "Class Dışında eklenen değişken";
+			console.log("Test:"+p1.diger2);
+			console.log(p1.x);
+			
+			console.log("*****")
+			console.log(Person.so1.deger1)
+			console.log(Person.so2.deger3);
+			console.log(Person.ststring1);
+			console.log(Person.ststring2);
+			console.log(Person.stsayi1);
+			console.log(Person.stsayi2);
+			console.log("******")
+			
 
 
 			class Engineer extends Person{
@@ -64,6 +87,7 @@
 			console.log(eng.func1()); 
 
 			console.log(Engineer.func2());
+			
 		</script> 
 </body>
 

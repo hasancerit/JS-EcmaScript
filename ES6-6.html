@@ -12,7 +12,7 @@
 <body>
 		<div class="container-fluid mt-4">              
             <button onclick="depola()" class="btn btn-dark"> JSON DEPOLA</button>
-            <button onclick="cek()" class="btn btn-dark"> JSON ÇEK</button>
+            <button id="but1" onclick="cek()"> JSON ÇEK</button>
         </div>
 
 		<script>
@@ -35,6 +35,9 @@
                 
                 console.log(obj1.isim+"\n"+obj2.isim);
             }   
+			
+			document.getElementById("but1").classList.add('btn-dark');
+        	document.getElementById("but1").classList.add('btn');
         
         /*JSON Stringdir. JSON.stringfy(X) X bir JS Objesi olmalıdır. Ve string return eder.
                           JSON.parse(Y)    Y bir String olmalıdır. Ve obje(dizi) return eder.*/
