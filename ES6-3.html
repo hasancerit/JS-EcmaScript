@@ -26,6 +26,7 @@
 				static stsayi1 = 5;  //static int
 				static ststring1 = "Static String"; //static string
 				
+				test = "Let var const kullanmadan, cons dışında variable olustarabiliyoruz";
 				
 				func1(){
 					return "FUNCTİON 1";
@@ -40,10 +41,19 @@
 					console.log("set name çağırıldı.")
 					this.name = name;
 				}
+				
+				funclog = function(){
+					
+					console.log(this);
+				}
+				
+				funcover(){
+					console.log("Overide Edilecek");
+				}
 			}
 			Person.so2 = {deger3:"Değer3",deger4:"Değer4"}; //Static sınıf 2
 			Person.stsayi2 = 10;
-			Person.ststring2 = "Sınıf için static string tanımladık"; //Static string 2
+			Person.ststring2 = "Sınıf için s	tatic string tanımladık"; //Static string 2
 			
 
 			let p1 = new Person("Hasan","Cerit",22);
@@ -56,7 +66,9 @@
 				console.log(p1.getName) 
 			p1.diger2 = "Class Dışında eklenen değişken";
 			console.log("Test:"+p1.diger2);
-			console.log(p1.x);
+			
+			console.log(p1.test);
+			p1.funclog();
 			
 			console.log("*****")
 			console.log(Person.so1.deger1)
@@ -72,10 +84,16 @@
 			class Engineer extends Person{
 				constructor(name,surname,age){
 					super(name,surname,age); //Üst sınıfın cons.çağırılmalı.
+					this.ekstra;	
 				}
 
 				static func2(){
 					return "Static Metod";
+				}
+				
+				funcover(){
+					console.log("Override Edildi");
+					console.log(this);
 				}
 			} 
 
@@ -87,6 +105,8 @@
 			console.log(eng.func1()); 
 
 			console.log(Engineer.func2());
+			
+			eng.funcover();
 			
 		</script> 
 </body>
