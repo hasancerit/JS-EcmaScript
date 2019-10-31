@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title> Java Script Ders </title>
+	<style>
+		.header{
+			text-align: center;
+			font-family: sans-serif;
+			font-size: 18px;
+			background: red;
+		}
+
+		.container{
+			text-align: center;
+			font-size: 30px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="header">
+		<h1>JS dersleri</h1>			
+	</div>
+
+	<script>
+		let name = "Hasan";
+
+		let funcName = function(){
+			this.var1 = "Var1"; //This window, var1 windowda tanımlanır
+			var2 = "Var2" 		//this.var3 gibi tanımlanır yani windowda
+			let var3 = "Var3";  //Local tanımlanır
+			
+			console.log(this.name);//this window olduğundan, direkt çağırılırsa, windowda name arar. (Hasan)
+		} 
+
+		funcName.stat = "STATC";
+
+		let obj1 = {
+			name : "Deniz",
+			func : funcName, //Fonksiyon metod ise, this obj1 nesnesidir. Dolayısı ile this.name="Deniz" olur.
+						  //this.var1 = "Var1" tanımlanası obj1 nesnesi içinde oluşur.
+			innerObj : {
+				name : "İnner Name",
+				funcİnner : funcName //Burdaki this de innerObj nesnesini gösterdi ve this.name = "İnner Name" olur.
+								  	 //this.var1 = "var1" tanımlası da innerObj nesnesi içinde tanımalanır. 
+			}
+		}
+
+		funcName(); 						//this window old. this.name = hasan;
+		obj1.func(); 					//this obj1 olduğundan this.name = "Deniz"
+		obj1.innerObj.funcİnner();		//this innerObj old. this.name = "İnner Name"
+		funcName.call(obj1); 				//func1 bu obje içinde metod olarak kullanılsın da diyebiliriz, this.name = "Deniz" olur.
+
+
+		/**************************************************************************************************************************/
+		console.log("/*İç İçe*/");
+
+		var surname = "Cerit";
+		let funcSurname = function(){
+			function func5(){			//Bu fonksiyon localdir. Sadece func2 kullanabilir.
+				console.log(this.surname)		//İç Fonksiyon da window gösterir.
+			};	
+			console.log(this.surname)
+			func5();
+		}
+
+		let obj2 = {
+			surname : "İnan",
+			objFunc : funcSurname
+		}
+		funcSurname(); 				//normal fonksiyon olarak çağırdığımızdan, 69 ve 67 için window yazar. 
+		obj2.objFunc(); 			//Metod olarak çapırıdğımızdan, 69 için this obj2'dir.67 için normal fonk olduğundan windowdur
+
+		/*************************************************************************************************************************/
+		console.log("/*CallBack*/")
+
+		let adimizYaz = function(callback){
+			setTimeout(function(){
+				console.log("Adım:Hasan");
+				callback();	
+			},3000)
+		}
+
+		let soyadımıYaz = function(){
+			setTimeout(function(){
+				console.log("Soyadım:Cerit");
+			},500);
+		} 
+
+		adimizYaz(soyadımıYaz);
+		/************************************************************************************************************************/
+	</script>
+
+	
+</body>
+
+</html>

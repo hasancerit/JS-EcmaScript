@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title> Java Script Ders </title>
+	<style>
+		.header{
+			text-align: center;
+			font-family: sans-serif;
+			font-size: 18px;
+			background: red;
+		}
+
+		.container{
+			text-align: center;
+			font-size: 30px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="header">
+		<h1>JS dersleri</h1>			
+	</div>
+
+	<script>
+		"use strict";
+		//CLASS YAPISINA GEÇ
+
+		class MyClass{
+			publicVar1 = 1;
+			#priVar = 5;
+			static stVar1 = "staticvar1"; //Static değişken, prototype-->cons içinde oluşur, nesneler erişemez, sadece MyClass.stVar1
+
+			constructor(var3){
+				//console.log(this);  //Nesneyi Gösterir.
+				this.publicVar2 = "Var 2";//public 
+				this.publicVar3 = "var3";
+				let a = 10;			//Prvate değil, constructor için local
+			}
+
+			func = function(){ //Metod tanılama1 (Direkt nesnede)
+				console.log("FUNC");
+			}
+
+			func2(){		  //Metod tanılama2 (Proto'da)
+				console.log("FUNC2");
+			}
+
+			funcGenel(){//Private veya değil tüm değişkenler,metodlar this. ile ulaşılır.
+				this.publicVar1 = 5;
+				this.#priVar = 10;
+				this.func();
+				this.func2();
+				console.log(this);
+			}
+		}
+
+		let obj1 = new MyClass("Var3");
+
+		let obj2 = new MyClass("Var4");
+
+		MyClass.prototype.x = 10;
+
+
+	</script>
+	
+</body>
+
+</html>

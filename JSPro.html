@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title> Java Script Ders </title>
+	<style>
+		.header{
+			text-align: center;
+			font-family: sans-serif;
+			font-size: 18px;
+			background: red;
+		}
+
+		.container{
+			text-align: center;
+			font-size: 30px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="header">
+		<h1>JS dersleri</h1>			
+	</div>
+
+	<script>
+		"use strict";
+
+		MyClass.prototype.x = 10// ile, MyClass'tan oluşacak nesnelerin __proto__'suna x ekleriz,
+										
+		let nesne = new MyClass();//MyClass'tan oluşan tüm nesneler nesne.x ile bu x'e erişir.*/
+		let nesne2 = new MyClass();//Oluşacak tüm nesneler için x ortaktır. Birinde değişirs hepsinde değişir.
+		nesne.x//10
+		nesne2.x//10
+
+		MyClass.prototype.x = 15; //Artık nesne ve nesne2 için x 15
+
+		nesne.__proto__.x = 20; //Nesneyi kullanarak da proto'daki x'i değiştirebiliriz. Her nesne için değişir.
+								//(.prototype'ı sadece class kullanabilir) --> MyClass.prototype
+								//Nesneden __proto__ ile değiştirebiliriz. Direkt nesne.x ile değiştiremeyiz, nesne içinde x adında farklı bir değişken oluşturur.
+
+		nesne.x//20
+		nesne2.x//20
+
+		/***********************************/
+
+		MyClass.y = 100 //ile, __proto__ --> constructor'a y ekleriz.
+
+		//nesne.y
+		//nesne2.y ile buraya erişemeyiz.
+
+		nesne.constructor.y
+		nesne2.constructor.y //ile erişebiliriz
+
+		nesne2.constructor.y = 200 //de de tüm nesneler için değişir.
+
+
+		/**********/
+	</script>					
+	
+</body>
+
+</html>

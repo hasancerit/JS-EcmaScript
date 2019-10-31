@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title> Java Script Ders </title>
+	<style>
+		.header{
+			text-align: center;
+			font-family: sans-serif;
+			font-size: 18px;
+			background: red;
+		}
+
+		.container{
+			text-align: center;
+			font-size: 30px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="header">
+		<h1>JS dersleri</h1>			
+	</div>
+
+	<script>
+		"use strict";
+		function myCons(isim){
+			//console.log(this);		 //Nesneyi gösterir
+			this.isim = isim; 			 //public, isim veya this.isim ile erişilebilir
+			let soyisim = "Def Soyisim"; //private, bunlara this ile erişilemez
+
+			this.getSoyisim = function(){//public metod
+				console.log("get soyisim")
+				console.log(this);        //This nesne
+				priMetod();				  //PrivateMetod Çağırdık
+				this.pubFunc();			  //Public Metod Çağırdık
+				return soyisim;
+			}
+
+			let priMetod = function(){	 //private, bunlara this ile erişilemez
+				console.log("private metod");
+				console.log(this); 		 //Private metod this undefined
+			}
+ 
+			this.pubFunc = function(){   //public, bunlara this. ile erişilmek zorunda.
+				console.log("public metod")
+				console.log(this);       //nesneyi gösterir.
+			}
+
+			this.innerObj = { 			 //public, bunlara this ile erişilmek zorubda.
+				okul : "sdü",
+				ort  : 2.5,
+				info : function(){
+					console.log(this);   //İnnerObj'e erişti
+					console.log(isim +" "+soyisim+" "+this.okul+" "+this.ort);
+				}
+			}
+		}
+
+		let myObj = new myCons("Hsn");
+		myCons.prototype.x = 10;
+
+		console.log(myObj.getSoyisim()); 			  //set get metodu kullandık.
+		console.log("**************");
+
+
+		let ekMetod = function(){
+			console.log("Bu bir ek metod");
+			console.log(this);//Bu fonksiyonu, nesneye atayıp metod olarak kullanacağımız için nesneyi gösterir. Direkt çağırsaydık undefined
+		} 
+
+		myObj.no = 32;		  		  	  //NESNEYE public değişken ekledik
+		myObj.isim = "Hasan"			  //Nesnenin isim değişkeninde update
+
+		myObj.ekMetod = ekMetod;		   //NESNEYE public metod ekledik
+		myObj.ekMetod();
+		console.log("**************");
+
+
+		myObj.innerObj.info()
+		console.log("?????????????");//PROTOTYPE OLAYINA BİRAZ DAHA BAK
+
+		myCons.staticDeneme = "Static Deneme";//myCons.x="x" dediğimizde x, objelerin proto-->myCons kısmında oluşır.
+		console.log(myCons.staticDeneme);
+		console.log(myObj.staticDeneme); //Nesne erişemez çünkü, myCons.x="x" dediğimizde x,objelerin proto-->myCons kısmında oluşur.
+
+		/**/console.log("**")
+		myCons.prototype.staticDenemePro="StaticDenemePro";//myCons.prototype.x = "x" dediğimizde x,objelerin proto kısmında oluşur.
+		console.log(myCons.prototype.staticDenemePro);		
+		console.log(myObj.staticDenemePro);					//Proto içine objeler de erişebilir.
+	</script>
+	
+</body>
+
+</html>

@@ -15,11 +15,13 @@
 
 		<script>
 			"use strict";
-
-			function func1(x=1){ //Varsayılan değer
-				return x;
+			function func1(x=1,...y){ //Varsayılan değer
+				return x+y;
 			}
-			console.log(func1(3)); //3 Yazar
+
+			let arr = [1,2,3,4,5];
+
+			console.log(func1(3,arr)); //3 Yazar
 			console.log(func1()); //1 Yazar
 
 			let dizi = ["Hasan","Deniz","Onur","Nazif"];
@@ -27,7 +29,13 @@
 			console.log(s1+" "+s2+" "+s3);
 
 
+			let func2 = () => {
+				console.log(this); //Window
+				console.log("Arrow Function");
+			}
+			func2();
 
+			
 		</script> 
 </body>
 

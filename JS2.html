@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title> Java Script Ders </title>
+	<style>
+		.header{
+			text-align: center;
+			font-family: sans-serif;
+			font-size: 18px;
+			background: red;
+		}
+
+		.container{
+			text-align: center;
+			font-size: 30px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="header">
+		<h1>JS dersleri</h1>			
+	</div>
+
+	<script>
+			"use strict";
+		let testObj  = {
+			local1 : "Local",
+			met : function(){
+				console.log(this); //Metod olduğu için nesneyi gösterir.
+				let self = this;   //for each fonk için.
+				let arr = [20, 43, 64];
+				arr.forEach(function(el){
+					console.log(this); //Direkt fonk olduğu için windowu gösterir,objenin local1 değişkenine this.local1'le ulaşamaz
+					console.log(self.local1);//Bunun için met metodundaki nesneyi gösterin thisi, self değişkenine atayıp onu 								  kullandık. 
+				});
+			}
+		}
+
+		testObj.met();
+		/****************************/
+		console.log("/***********************/")
+		let testObj2 = {
+			local1 : "Local",
+			met : function(){
+				console.log(this); //Metod olduğu için nesneyi gösterir.
+				let local = "12";
+				let arr = [20, 43, 64];
+				arr.forEach(say.bind(this)); // say fonksiyonu'na thisi bağladık. say fonksiyonu this olarak bu thisi kullansın 									dedik.
+			}
+		}
+
+		function say(el){
+			console.log(el);
+			console.log(this);
+			console.log(this.local1);
+		}
+
+		testObj2.met();
+
+		/****************************/
+		console.log("/***********************/")
+		let testObj3 = {
+			local1 : "Local",
+			met : function(){
+				console.log(this); //Metod olduğu için nesneyi gösterir.
+				let local = "12";
+				let arr = [20, 43, 64];
+				arr.forEach((el) => { //Callback sorununu arrow func ile de çözebiliriz
+					console.log(this);
+					console.log(this.local1);
+					console.log(el);
+				}); 
+			}
+		}
+
+		testObj3.met();
+	</script>
+	
+</body>
+
+</html>

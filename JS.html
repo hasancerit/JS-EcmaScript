@@ -65,27 +65,119 @@
 		</div>
 	</div>
 
-	
-
-	<script> //Fonksiyon ve Obje Yöntemleri
-		//Func Olusturma Yöntemi 1
-		function func1(text){
-			console.log(text);
-			return text;
+	<script> //Fonksiyonlar
+		//Func Olusturma Yöntemi 1 Declaration
+		console.log("\n**Function Tanımalamaları**")
+		function func1(){
+			console.log(this); //def=window , use strict ile undefined
+			var localvariable = "Local Variable";
+			this.localvariable2 = "Local Variable 2"; //Yaparsak Global tanımlamış oluruz. Çünkü this window.(Use Strict varsa hata 																							verir çünkü this undefined)	
+			console.log("FUNCTİON 1");
+			return localvariable2;
 		}
-		deger = func1("Function 1");
-		console.log("Deger:"+deger);
+		console.log(func1());
+		console.log(localvariable2);
 
-		//Func Olusturma Yöntemi 2
+		//Func Olusturma Yöntemi 2 Expession (Not Hoisted) Diğer özellikler Declaration ile aynı
 		var func2 = function(){
-			console.log("FUNC 2");
+			console.log("Function 2");
 		}
 		func2();
 
+		let x = "dsdss";
+
+		console.log("\n**İç içe**");
+		//İç içe fonksiyonlar.
+		function func3(x){
+			console.log("Function 3 baş");
+			function func4(){ //Bu Fonksiyonu dışarıdan çağıramayız. sadece func3 içinde.
+				console.log("TEEEEST:"+this);
+				console.log("Function 4");
+			}
+
+			func5 = function(){				 //Use Strict kullanmıyorsak, bu şekilde tanımlarsak this.func5() olarak tanımlar ve 
+				console.log("Function 5:"+x);//dışarıdan çağırabiliriz, çünkü this windowdur. Aynı zamanda func3 içindeki local 								 //değişkenleri de kullanabilir. Fonksiyonun dışarıdan bir kere çağırılabilmesi için,
+											 //en az bir kere func3'ü çağırmak gerekir.
+				console.log(this);
+			}								 //Use Strict varsa böyle bir tanımlamada hata verir çünkü this undefined'dır*/
+			func4();
+			func5();
+			console.log("Function 3 son");
+		}
+
+
+		func3("Son Atılan Local");
+		func5(); //Burada func3 içinde this.func5() = .. olarak tanımlanmış fonk. kullanabildik çünkü this window, aynı zamanda 
+				 //func3 içindeki local değişkene de erişebildi.Func3'te atılan son x local değeri ne ise, burada çağırdığımız
+				 //func5 içindeki x de o değeri alır.
+
+		//Return Function 
+		function outside(x) {
+
+		  let inside =function(y) { //Üstteki olayın aynısı, fonksiyon içinde, declaration fonk tanımlar ve return edersek de 						    	   //geçerli. Döndürülen fonksiyon, outside localini kullanıyor.
+		 	 return x+y;
+		  }
+		  return inside;
+		}
+		fn_inside = outside(3); // Think of it like: give me a function that adds 3 to whatever you give
+
+		result = fn_inside(5); // returns 8
+							   //fn_inside döndüren outside içinde x=3 olduğu için x=3 kabul edilecek.
+		outside(3)(5); //return 8
+
+
+		//Örnek
+		var createPet = function(name) {
+		  var sex;
+		  //var name
+		  return( 
+		  { //İçinde fonksiyonların olduğu bir nesne
+		    setName: function(newName) {
+		      name = newName;
+		    },
+		    
+		    getName: function() {
+		      return name;
+		    },
+		    
+		    getSex: function() {
+		      return sex;
+		    },
+		    
+		    setSex: function(newSex) {
+		      if(typeof newSex === 'string' && (newSex.toLowerCase() === 'male' || 
+		        newSex.toLowerCase() === 'female')) {
+		        sex = newSex;
+		      }
+		    }
+		  })
+		}
+		var pet = createPet('Vivie'); //Buradaki dönen pet nesnesi için name = vivie kabul edilecek.
+	</script>
+
+	<script >//Objeler
+	 	//"use strict";
+		console.log("\n\n**Obje Oluşturma1**")
 
 		//Obje olusturma yönetimi 1 
+		var calisan2 = new Object();
+		calisan2.isim = "Deniz"; //calisan2[isim] = "Deniz";  
+		calisan2.soyisim = "İnan"; 
+		calisan2.isimBilgiler = function(){
+			return "İsim:" + this.isim;
+		};
+
+		console.log(calisan2.staticDeneme)
+		console.log(calisan2.isim);
+		console.log(calisan2.isimBilgiler());
+		//Object.create() bak
+
+
+	
+		console.log("\n**Obje Oluşturma2**")
+		//Obje colusturma yöntemi 2
 		var calisan = { 
-			isim : "Hasan",//"isim": "Hasan" şeklinde de olabilir.
+			isim : "Hasan",//"isim": "Hasan" şeklinde de olabilir... this.isim veya let isim diye bir kullanım yok. 
 			soyisim : "Cerit",
 			no : "1",
 			diller : ["Java","C","pyhton"], 
@@ -93,56 +185,87 @@
 				mahalle : "Fatih",
 				sokak : "4601"
 			},
-			isimBilgiler : function(){ //Obje içi func
+			isimBilgiler : function test(){ //Obje içi func
+				console.log(this); //this her zaman calisan nesnesini gösterir.
 				return "İsim:" + this.isim;
-			}
+			},
+			get getSoyad(){ //Özel set,get böyle tanımlanabilir.
+				return this.soyisim;
+			} 
+			/* function getNo(){ 	şeklinde expression ya da declaration tanılamlanamaz.özel get,set metodları istisna  
+				return this.no; 
+			}*/
 		}
-		console.log(calisan.isim);
+		calisan.deger = "Sonradan eklenen deger"; //Sonradan da ekleme yapabiliriz.
+		calisan.func2 = function(){
+			console.log("Yöntem 2 Sonradan eklenen Fonksiyon");
+		}
+
+		console.log(calisan.deger);
+		calisan.func2();
+		console.log(calisan.isim);//calisan[isim] 
 		console.log(calisan.diller[2]);
 		console.log(calisan.adres.mahalle);
 		console.log(calisan.isimBilgiler());
+		console.log(calisan.getSoyad)
 
-		//Obje colusturma yöntemi 2
-		var calisan2 = new Object();
-		calisan2.isim = "Deniz";
-		calisan2.soyisim = "İnan";
-		calisan2.isimBilgiler = function(){
-			return "İsim:" + this.isim;
-		};
-		console.log(calisan2.isim);
-		console.log(calisan2.isimBilgiler());
 
+		console.log("\n**Obje Oluşturma3**");
 		//Obje oluturma yöntemi 3 **
 		function Calisan(isim,soyisim,no){
-			this.isim = isim;
+			console.log(this) //Burada fonksiyon normal fonksiyon gibi değil de new ile oluşacağı için, this nesneyi gösterir
+			this.digerBilgi;
+			let digerBilgi2; //Nesne içi değişken tanımlamak için this gerekli değil.
+
+			this.isim = isim; //Burada this gerekli, çünkü constructor'dan gelen isim ile, nesne için tanımlayacağımız ismin					 karışmasını önler
 			this.soyisim = soyisim;
 			this.no = no;
-			var digerBilgi; //this.digerBilgi;
 
-			this.isimBilgiler = function(){
+			this.isimBilgiler = function(){ //Metod tanımlamak için this olmak zorunda
 				return this.isim;
 			}
-			this.digerfunc; //Dışarıdan fonk atama, this.digerfunc
+
+			this.digerfunc; //Dışarıdan fonk atamak, bunda this olmak zorunda değil, let digerfunc da olabilir
 			
-			/*function func3(){ 
+			this.nesne = {
+				bilinendil : "Java",
+				yil : "3"
+			};
+
+			/*function func3(){  şeklinde olamaz. Üstteki gibi olacak
 				console.log("FUNC3");
-			} şeklinde olamaz. Üstteki gibi olacak*/
+			}*/
 		}
 		var calisan3 = new Calisan("Onur","Ekin","3");
 		calisan3.isim = "Onur Update";
+
 		calisan3.digerBilgi = "Cons ile gönderilmedi";
 		calisan3.digerBilgi2 = "Bu da cons ile gönderilmedi"
 		calisan3.digerfunc = function(){
 			return "Dışardan Fonksiyon Atama";
-		}
-
+		}		
 		console.log(calisan3.isim);
-		console.log(calisan3.isimBilgiler()); 
+		console.log(calisan3.no);
+		console.log(calisan3.soyisim);
+
 		console.log(calisan3.digerBilgi);
+		console.log(calisan3.digerBilgi2);
+
+		console.log(calisan3.isimBilgiler());
 		console.log(calisan3.digerfunc());
-	</script>
+		//delete calisan3.no; 
+
+		console.log(calisan3.nesne.yil);
+		console.log(calisan3);
+		
+		console.log(new Calisan);
+		//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain inheritance
+		
+
+		</script>
 
 	<script> //Events
+		console.log("\n\n\n****************")
 
 		function tikla(tiklanan){// Html Kısmından gelen elementi çekip, manip yapıyoruz.
 			tiklanan.style.color = "red";
@@ -156,6 +279,33 @@
 		function renkdegis2(p1element){ //Degişecek element html kısmında yollanıyor, onu çekip manip yapıyoruz.
 			p1element.style.color = "red";
 		}
+	</script>
+
+	<script>//DOM 
+		//Element Fonksiyonları https://www.w3schools.com/jsref/dom_obj_all.asp
+		var elementp = document.getElementById("idp"); //Element Çekme
+		elementp.innerHTML = "Değiştirilmiş Paragraf";
+
+		var h2elements = document.getElementsByTagName("h2");
+		for (var i = 0; i < h2elements.length; i++) {
+			h2elements[i].style.color = "red";
+			h2elements[i].innerHTML = "B";
+		}
+
+		var elementdiv = document.getElementById("iddiv1");
+		elementdiv.onclick = function(){
+			this.innerHTML = "DEĞİŞTİRİLMİŞ DİV"; //Eğer JS ile event atarsak, this kullanarak, event atadığımız componentin Elementine ulaşabiliriz. (HTML kısmında, comp içinde event tanımladığımızdaki this gibi)
+		}
+
+		var yenielementp = document.createElement("p"); //Element oluşturma
+		yenielementp.innerHTML = "4. Paragraf";
+		yenielementp.style.color = "green";
+
+		var elementdiv2 = document.getElementById("iddiv2");
+		elementdiv2.appendChild(yenielementp);//Dive element ekleme
+
+		var elementps = document.getElementById("rem");
+		elementdiv2.removeChild(rem);//Divden element çıkarma
 	</script>
 
 	<script> //Sonradan Öğrendiklerim
@@ -196,35 +346,6 @@
 		ayır(obj);
 
 		console.log("***");
-		
-
-	</script>
-
-	<script>//DOM 
-		//Element Fonksiyonları https://www.w3schools.com/jsref/dom_obj_all.asp
-		var elementp = document.getElementById("idp"); //Element Çekme
-		elementp.innerHTML = "Değiştirilmiş Paragraf";
-
-		var h2elements = document.getElementsByTagName("h2");
-		for (var i = 0; i < h2elements.length; i++) {
-			h2elements[i].style.color = "red";
-			h2elements[i].innerHTML = "B";
-		}
-
-		var elementdiv = document.getElementById("iddiv1");
-		elementdiv.onclick = function(){
-			this.innerHTML = "DEĞİŞTİRİLMİŞ DİV"; //Eğer JS ile event atarsak, this kullanarak, event atadığımız componentin Elementine ulaşabiliriz. (HTML kısmında, comp içinde event tanımladığımızdaki this gibi)
-		}
-
-		var yenielementp = document.createElement("p"); //Element oluşturma
-		yenielementp.innerHTML = "4. Paragraf";
-		yenielementp.style.color = "green";
-
-		var elementdiv2 = document.getElementById("iddiv2");
-		elementdiv2.appendChild(yenielementp);//Dive element ekleme
-
-		var elementps = document.getElementById("rem");
-		elementdiv2.removeChild(rem);//Divden element çıkarma
 	</script>
 </body>
 
